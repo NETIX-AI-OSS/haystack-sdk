@@ -9,9 +9,6 @@ from haystack_sdk.formats import trio_encode_scalar
 
 def render_trio(grid: dict[str, Any]) -> str:
     """Render a grid dict as a Trio string."""
-    if not isinstance(grid, dict):
-        return str(grid)
-
     rows = grid.get("rows") or []
     cols = grid.get("cols") or []
     col_names: list[str] = [c["name"] for c in cols] if cols else []

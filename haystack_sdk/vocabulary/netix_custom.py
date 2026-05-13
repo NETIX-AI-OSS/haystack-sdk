@@ -55,7 +55,7 @@ MANUAL_TAG = TagDef(
     doc="Point was manually tagged (not auto-tagged)",
 )
 
-NETIX_CUSTOM = Vocabulary(
+PACK = Vocabulary(
     name="netix_custom",
     version="1.0.0",
     tags=(

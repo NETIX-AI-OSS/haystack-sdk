@@ -17,7 +17,7 @@ import json
 import re
 from typing import Any
 
-from haystack_sdk.types import Grid
+from haystack_sdk.types import Column, Grid
 
 
 def parse_zinc(text: str) -> Grid:
@@ -32,7 +32,7 @@ def parse_zinc(text: str) -> Grid:
 
     meta = _parse_meta(lines[0])
     col_names = [c.strip() for c in lines[1].split(",")]
-    cols = [{"name": name} for name in col_names]
+    cols: list[Column] = [{"name": name} for name in col_names]
 
     rows: list[dict[str, Any]] = []
     for line in lines[2:]:

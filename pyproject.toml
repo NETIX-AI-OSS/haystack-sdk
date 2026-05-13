@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Project Haystack 4 parser, renderer, vocabulary, and Brick mapping SDK for NETIX services"
 readme = "README.md"
 license = { text = "Apache-2.0" }
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 authors = [{ name = "NETIX AI" }]
 keywords = ["haystack", "brick", "iot", "semantic-tagging", "smart-buildings"]
 classifiers = [
@@ -12,8 +12,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
     "Topic :: Software Development :: Libraries",
 ]
@@ -50,7 +48,7 @@ packages = ["haystack_sdk"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py312"
+target-version = "py314"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "RUF"]
@@ -61,10 +59,10 @@ ignore = ["E501", "RUF001", "RUF002", "RUF003"]
 
 [tool.black]
 line-length = 120
-target-version = ["py312"]
+target-version = ["py314"]
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.14"
 strict = true
 warn_unreachable = true
 disallow_untyped_defs = true

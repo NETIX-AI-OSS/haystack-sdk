@@ -59,7 +59,7 @@ PRESSURE_BREAK_STATION = TagDef(
     doc="Pressure-breaking or pressure-sustaining station between loop pressure zones",
 )
 
-DISTRICT_COOLING = Vocabulary(
+PACK = Vocabulary(
     name="district_cooling",
     version="1.0.0",
     tags=(

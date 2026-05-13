@@ -176,7 +176,7 @@ HIS_INTERPOLATE = TagDef(
     doc="History interpolation mode: COV, linear, break",
 )
 
-CORE = Vocabulary(
+PACK = Vocabulary(
     name="core",
     version="1.0.0",
     tags=(

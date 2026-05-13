@@ -66,7 +66,7 @@ WATER_QUALITY_SENSOR = TagDef(
     doc="Inline multi-parameter water quality sensor (turbidity, pH, chlorine, conductivity)",
 )
 
-WATER_TREATMENT = Vocabulary(
+PACK = Vocabulary(
     name="water_treatment",
     version="1.0.0",
     tags=(

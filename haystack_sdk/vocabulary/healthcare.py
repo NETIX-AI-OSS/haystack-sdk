@@ -62,7 +62,7 @@ LAB_ROOM = TagDef(
     doc="Medical or research laboratory space — fume extraction and pressure differential requirements",
 )
 
-HEALTHCARE = Vocabulary(
+PACK = Vocabulary(
     name="healthcare",
     version="1.0.0",
     tags=(

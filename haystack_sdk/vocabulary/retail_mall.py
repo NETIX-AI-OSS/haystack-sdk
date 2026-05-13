@@ -111,7 +111,7 @@ TRANSFORMER_PANEL = TagDef(
     doc="Transformer substation distribution panel (TP); feeds one or more switchboards",
 )
 
-RETAIL_MALL = Vocabulary(
+PACK = Vocabulary(
     name="retail_mall",
     version="1.0.0",
     tags=(

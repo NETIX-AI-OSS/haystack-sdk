@@ -12,14 +12,14 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from haystack_sdk.vocabulary._base import TagDef, Vocabulary
-from haystack_sdk.vocabulary.core import CORE
-from haystack_sdk.vocabulary.district_cooling import DISTRICT_COOLING
-from haystack_sdk.vocabulary.fdd import FDD
-from haystack_sdk.vocabulary.healthcare import HEALTHCARE
-from haystack_sdk.vocabulary.netix_custom import NETIX_CUSTOM
-from haystack_sdk.vocabulary.residential import RESIDENTIAL
-from haystack_sdk.vocabulary.retail_mall import RETAIL_MALL
-from haystack_sdk.vocabulary.water_treatment import WATER_TREATMENT
+from haystack_sdk.vocabulary.core import PACK as CORE
+from haystack_sdk.vocabulary.district_cooling import PACK as DISTRICT_COOLING
+from haystack_sdk.vocabulary.fdd import PACK as FDD
+from haystack_sdk.vocabulary.healthcare import PACK as HEALTHCARE
+from haystack_sdk.vocabulary.netix_custom import PACK as NETIX_CUSTOM
+from haystack_sdk.vocabulary.residential import PACK as RESIDENTIAL
+from haystack_sdk.vocabulary.retail_mall import PACK as RETAIL_MALL
+from haystack_sdk.vocabulary.water_treatment import PACK as WATER_TREATMENT
 
 __all__ = [
     "ALL_PACKS",
@@ -82,7 +82,7 @@ def validate_markers(names: set[str] | frozenset[str], *, extra: set[str] | None
     ``extra`` is an optional set of additional names to treat as known —
     e.g. per-org custom tags from a service-side store.
     """
-    all_known = set()
+    all_known: set[str] = set()
     for pack in ALL_PACKS:
         all_known.update(pack.names())
     if extra:

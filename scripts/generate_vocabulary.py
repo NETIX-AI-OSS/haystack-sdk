@@ -115,9 +115,21 @@ def render_tagdef(row: TagRow) -> str:
 
 
 def render_module(json_stem: str, vocab_name: str, constant_var: str, rows: list[TagRow]) -> str:
+    """Render a vocabulary module.
+
+    Each pack module exports a single :class:`Vocabulary` named ``PACK`` plus
+    one :class:`TagDef` constant per row. The ``PACK`` indirection avoids any
+    collision with tag-named constants (e.g. a tag named ``retailMall`` would
+    otherwise shadow the pack constant named ``RETAIL_MALL``). ``__init__.py``
+    re-exports ``PACK`` under the public pack constant name.
+
+    ``constant_var`` and ``vocab_name`` are kept as parameters so the generated
+    Vocabulary has its semantic name attached.
+    """
+    del constant_var  # name re-exported in vocabulary/__init__.py instead
     lines: list[str] = [HEADER.format(json_name=json_stem)]
 
-    used_names: set[str] = set()
+    used_names: set[str] = {"PACK"}  # reserve the pack-level export
     consts: list[str] = []
     for row in rows:
         base = constant_name(row.name)
@@ -131,7 +143,7 @@ def render_module(json_stem: str, vocab_name: str, constant_var: str, rows: list
         lines.append(f"{const} = {render_tagdef(row)}")
 
     lines.append("")
-    lines.append(f"{constant_var} = Vocabulary(")
+    lines.append("PACK = Vocabulary(")
     lines.append(f"    name={vocab_name!r},")
     lines.append(f"    version={VOCAB_VERSION!r},")
     lines.append("    tags=(")
@@ -144,16 +156,27 @@ def render_module(json_stem: str, vocab_name: str, constant_var: str, rows: list
 
 
 def _ruff_format(text: str) -> str:
-    """Pipe text through ruff format so generator output matches the lint config."""
+    """Pipe text through ruff so generator output matches the lint config.
+
+    Runs both ``ruff check --fix`` (for isort + autofixes) and ``ruff format``
+    (for whitespace/formatting) so the result matches what CI expects.
+    """
     try:
-        result = subprocess.run(
-            ["ruff", "format", "--stdin-filename", "generated.py", "-"],
+        fixed = subprocess.run(
+            ["ruff", "check", "--fix", "--exit-zero", "--stdin-filename", "generated.py", "-"],
             input=text,
             capture_output=True,
             text=True,
             check=True,
-        )
-        return result.stdout
+        ).stdout
+        formatted = subprocess.run(
+            ["ruff", "format", "--stdin-filename", "generated.py", "-"],
+            input=fixed,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+        return formatted
     except (FileNotFoundError, subprocess.CalledProcessError):
         # ruff not on PATH (e.g. running outside the dev environment) — return as-is.
         return text

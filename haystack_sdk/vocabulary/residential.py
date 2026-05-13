@@ -94,7 +94,7 @@ FILTER_STATUS = TagDef(
     doc="Point indicates air filter condition or differential pressure status",
 )
 
-RESIDENTIAL = Vocabulary(
+PACK = Vocabulary(
     name="residential",
     version="1.0.0",
     tags=(

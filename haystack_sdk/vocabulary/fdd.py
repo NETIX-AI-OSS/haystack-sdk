@@ -31,7 +31,7 @@ RUN_HOURS = TagDef(
     doc="Point tracks cumulative equipment run-hours",
 )
 
-FDD = Vocabulary(
+PACK = Vocabulary(
     name="fdd",
     version="1.0.0",
     tags=(

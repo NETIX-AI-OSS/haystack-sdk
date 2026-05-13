@@ -9,9 +9,6 @@ from haystack_sdk.formats import zinc_encode_scalar
 
 def render_zinc(grid: dict[str, Any]) -> str:
     """Render a grid dict (``{meta, cols, rows}``) as a Zinc string."""
-    if not isinstance(grid, dict):
-        return str(grid)
-
     meta = grid.get("meta") or {}
     cols = grid.get("cols") or []
     rows = grid.get("rows") or []

@@ -13,7 +13,7 @@ import json
 import re
 from typing import Any
 
-from haystack_sdk.types import Grid
+from haystack_sdk.types import Column, Grid
 
 
 def parse_trio(text: str) -> Grid:
@@ -32,7 +32,7 @@ def parse_trio(text: str) -> Grid:
             rows.append(row)
             all_keys.update(row.keys())
 
-    cols = [{"name": k} for k in sorted(all_keys)]
+    cols: list[Column] = [{"name": k} for k in sorted(all_keys)]
     return {"meta": {"ver": "3.0"}, "cols": cols, "rows": rows}
 
 
