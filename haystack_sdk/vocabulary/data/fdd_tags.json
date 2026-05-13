@@ -1,0 +1,26 @@
+[
+  {
+    "name": "equipType",
+    "display_name": "Equipment Type",
+    "kind": 3,
+    "namespace": "netix",
+    "doc": "FDD equipment class name (e.g. AHU, FAHU, FCU, Chiller). Used by the alarm rule template engine to scope point lookups to a specific equipment class.",
+    "is_custom": true
+  },
+  {
+    "name": "fddTagName",
+    "display_name": "FDD Tag Name",
+    "kind": 3,
+    "namespace": "netix",
+    "doc": "Canonical point name from the NETIX equipment template (e.g. 'Supply Air Temperature'). The FDD alarm rule template engine resolves AlarmRuleTemplate.tag_name to tag_id by querying PointTagDict where fddTagName matches.",
+    "is_custom": true
+  },
+  {
+    "name": "runHours",
+    "display_name": "Run Hours",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point tracks cumulative equipment run-hours",
+    "is_custom": true
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "name": "retailMall",
+    "display_name": "Retail Mall",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Site is a retail shopping mall",
+    "is_custom": true,
+    "supertype_name": "site"
+  },
+  {
+    "name": "tenantUnit",
+    "display_name": "Tenant Unit",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Space is a leasable retail unit within a mall",
+    "is_custom": true,
+    "supertype_name": "space"
+  },
+  {
+    "name": "fashionTenant",
+    "display_name": "Fashion Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a clothing or apparel store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "footwearTenant",
+    "display_name": "Footwear Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a footwear or shoe store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "sportsTenant",
+    "display_name": "Sports Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a sports or activewear store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "fAndBTenant",
+    "display_name": "F&B Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a food and beverage outlet (restaurant, café, fast food)",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "beautyTenant",
+    "display_name": "Beauty Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a beauty, cosmetics, or personal care store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "electronicsTenant",
+    "display_name": "Electronics Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates an electronics or technology store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "servicesTenant",
+    "display_name": "Services Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a service business: bank, telecom, salon, pharmacy, or similar",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "kidsRetailTenant",
+    "display_name": "Kids Retail Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a children's goods or clothing store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "jewelryTenant",
+    "display_name": "Jewelry Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a jewelry, watch, or fine accessories store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "homeLivingTenant",
+    "display_name": "Home & Living Tenant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Tenant operates a home goods, kitchenware, or interior store",
+    "is_custom": true,
+    "supertype_name": "tenantUnit"
+  },
+  {
+    "name": "tenantMeter",
+    "display_name": "Tenant Meter",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Electrical sub-meter scoped to a single tenant unit",
+    "is_custom": true,
+    "supertype_name": "subMeter"
+  },
+  {
+    "name": "switchboard",
+    "display_name": "Switchboard",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Main electrical distribution switchboard (ВРУ/WRU in CIS convention); feeds one or more tenant zones",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "transformerPanel",
+    "display_name": "Transformer Panel",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Transformer substation distribution panel (TP); feeds one or more switchboards",
+    "is_custom": true,
+    "supertype_name": "equip"
+  }
+]

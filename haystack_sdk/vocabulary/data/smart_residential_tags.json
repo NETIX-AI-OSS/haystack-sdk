@@ -1,0 +1,103 @@
+[
+  {
+    "name": "fahu",
+    "display_name": "Fresh Air Handling Unit",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Equipment is a fresh/outdoor air handling unit (FAHU); subtype of ahu",
+    "is_custom": true,
+    "supertype_name": "ahu"
+  },
+  {
+    "name": "oahu",
+    "display_name": "Outdoor Air Handling Unit",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Equipment is an outdoor air handling unit (OAHU); subtype of ahu",
+    "is_custom": true,
+    "supertype_name": "ahu"
+  },
+  {
+    "name": "iaqSensor",
+    "display_name": "IAQ Sensor",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Equipment is an indoor air quality (IAQ) multi-sensor device",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "chwPump",
+    "display_name": "Chilled Water Pump",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Equipment is a chilled water circulating pump",
+    "is_custom": true,
+    "supertype_name": "pump"
+  },
+  {
+    "name": "lift",
+    "display_name": "Lift / Elevator",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Equipment is a passenger or service lift",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "pm2p5",
+    "display_name": "PM 2.5",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point measures PM 2.5 fine particulate concentration",
+    "is_custom": true
+  },
+  {
+    "name": "pm10",
+    "display_name": "PM 10",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point measures PM 10 coarse particulate concentration",
+    "is_custom": true
+  },
+  {
+    "name": "tvoc",
+    "display_name": "TVOC",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point measures total volatile organic compound (TVOC) concentration",
+    "is_custom": true
+  },
+  {
+    "name": "ch2o",
+    "display_name": "CH2O / Formaldehyde",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point measures formaldehyde (CH2O) concentration",
+    "is_custom": true
+  },
+  {
+    "name": "fireAlarm",
+    "display_name": "Fire Alarm",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point is a fire alarm status or trigger signal",
+    "is_custom": true
+  },
+  {
+    "name": "hoa",
+    "display_name": "HOA Mode",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point indicates hand/off/auto (HOA) control mode",
+    "is_custom": true
+  },
+  {
+    "name": "filterStatus",
+    "display_name": "Filter Status",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point indicates air filter condition or differential pressure status",
+    "is_custom": true
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "hospital",
+    "display_name": "Hospital",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Site is a hospital or healthcare facility",
+    "is_custom": true,
+    "supertype_name": "site"
+  },
+  {
+    "name": "icuRoom",
+    "display_name": "ICU Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Space is an Intensive Care Unit room — critical HVAC and monitoring requirements",
+    "is_custom": true,
+    "supertype_name": "space"
+  },
+  {
+    "name": "isolationRoom",
+    "display_name": "Isolation Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Space is a clinical isolation room (positive or negative pressure controlled)",
+    "is_custom": true,
+    "supertype_name": "space"
+  },
+  {
+    "name": "negPressureRoom",
+    "display_name": "Negative Pressure Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Negative pressure isolation room for airborne infection control (e.g. TB, COVID)",
+    "is_custom": true,
+    "supertype_name": "isolationRoom"
+  },
+  {
+    "name": "posPressureRoom",
+    "display_name": "Positive Pressure Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Positive pressure protective environment room for immunocompromised patients",
+    "is_custom": true,
+    "supertype_name": "isolationRoom"
+  },
+  {
+    "name": "sterileZone",
+    "display_name": "Sterile Zone",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Sterile processing zone or clean room — HVAC pressure, filtration, and humidity are critical",
+    "is_custom": true,
+    "supertype_name": "space"
+  },
+  {
+    "name": "pharmacyColdRoom",
+    "display_name": "Pharmacy Cold Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Pharmacy refrigerated storage space — temperature and humidity alarming required",
+    "is_custom": true,
+    "supertype_name": "space"
+  },
+  {
+    "name": "labRoom",
+    "display_name": "Lab Room",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Medical or research laboratory space — fume extraction and pressure differential requirements",
+    "is_custom": true,
+    "supertype_name": "space"
+  }
+]

@@ -1,0 +1,6 @@
+ver:"3.0"
+id,dis,site,building,equip,ahu,equipRef,siteRef
+@s1,"Main Site",M,N,N,N,N,N
+@b1,"Building A",N,M,N,N,N,@s1
+@e1,"AHU-1",N,N,M,M,N,@s1
+@p1,"AHU-1 Discharge Temp",N,N,N,N,@e1,@s1

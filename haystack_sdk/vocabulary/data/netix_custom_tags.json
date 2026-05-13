@@ -1,0 +1,11 @@
+[
+  {"name": "clinicSpace", "display_name": "Clinic Space", "kind": 0, "namespace": "netix", "doc": "Space is a diagnostic clinic room", "is_custom": true},
+  {"name": "orRoom", "display_name": "OR Room", "kind": 0, "namespace": "netix", "doc": "Operating/procedure room", "is_custom": true},
+  {"name": "mriRoom", "display_name": "MRI Room", "kind": 0, "namespace": "netix", "doc": "MRI suite with RF isolation requirement", "is_custom": true},
+  {"name": "rfIsolator", "display_name": "RF Isolator", "kind": 0, "namespace": "netix", "doc": "Equipment is an RF isolator circuit", "is_custom": true},
+  {"name": "subMeter", "display_name": "Sub Meter", "kind": 0, "namespace": "netix", "doc": "Equipment is an electrical sub-meter (extends meter)", "is_custom": true, "supertype_name": "meter"},
+  {"name": "protocol", "display_name": "Protocol", "kind": 3, "namespace": "netix", "doc": "Wire protocol: modbus-rtu, bacnet-ip, snmp-v3, mqtt", "is_custom": true},
+  {"name": "modbusRegister", "display_name": "Modbus Register", "kind": 2, "namespace": "netix", "doc": "Source Modbus register address", "is_custom": true},
+  {"name": "bacnetObjectId", "display_name": "BACnet Object ID", "kind": 3, "namespace": "netix", "doc": "Source BACnet object identifier", "is_custom": true},
+  {"name": "manualTag", "display_name": "Manual Tag", "kind": 0, "namespace": "netix", "doc": "Point was manually tagged (not auto-tagged)", "is_custom": true}
+]

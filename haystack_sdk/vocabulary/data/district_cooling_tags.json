@@ -1,0 +1,63 @@
+[
+  {
+    "name": "dcPlant",
+    "display_name": "District Cooling Plant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Site is a district cooling production and distribution plant",
+    "is_custom": true,
+    "supertype_name": "site"
+  },
+  {
+    "name": "energyTransferStation",
+    "display_name": "Energy Transfer Station",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Customer energy transfer station (ETS) — hydraulic separation between primary distribution and secondary building loop",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "chwFlowMeter",
+    "display_name": "CHW Flow Meter",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Chilled water BTU/flow meter for customer or zone energy metering",
+    "is_custom": true,
+    "supertype_name": "subMeter"
+  },
+  {
+    "name": "primaryLoop",
+    "display_name": "Primary Loop",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point or equipment is on the primary chilled water production loop",
+    "is_custom": true
+  },
+  {
+    "name": "secondaryLoop",
+    "display_name": "Secondary Loop",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Point or equipment is on the secondary chilled water distribution loop",
+    "is_custom": true
+  },
+  {
+    "name": "thermalStorage",
+    "display_name": "Thermal Storage",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Thermal energy storage tank (chilled water accumulator or ice storage)",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "pressureBreakStation",
+    "display_name": "Pressure Break Station",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Pressure-breaking or pressure-sustaining station between loop pressure zones",
+    "is_custom": true,
+    "supertype_name": "equip"
+  }
+]

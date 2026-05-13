@@ -1,0 +1,74 @@
+[
+  {
+    "name": "waterTreatmentPlant",
+    "display_name": "Water Treatment Plant",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Site is a water treatment or wastewater treatment facility",
+    "is_custom": true,
+    "supertype_name": "site"
+  },
+  {
+    "name": "treatmentBasin",
+    "display_name": "Treatment Basin",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Sedimentation or primary filtration basin",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "clarifier",
+    "display_name": "Clarifier",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Clarification vessel for coagulation and flocculation",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "aerationTank",
+    "display_name": "Aeration Tank",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Aeration tank or bioreactor for biological treatment",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "uvSterilizer",
+    "display_name": "UV Sterilizer",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "UV sterilization unit for disinfection",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "membraneFilter",
+    "display_name": "Membrane Filter",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Reverse osmosis or ultrafiltration membrane module",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "chemicalDosingUnit",
+    "display_name": "Chemical Dosing Unit",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Chemical dosing system for chlorination, pH correction, or coagulant addition",
+    "is_custom": true,
+    "supertype_name": "equip"
+  },
+  {
+    "name": "waterQualitySensor",
+    "display_name": "Water Quality Sensor",
+    "kind": 0,
+    "namespace": "netix",
+    "doc": "Inline multi-parameter water quality sensor (turbidity, pH, chlorine, conductivity)",
+    "is_custom": true,
+    "supertype_name": "equip"
+  }
+]
