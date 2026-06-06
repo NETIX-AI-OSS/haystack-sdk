@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from haystack_sdk import parse_zinc, render_zinc
+from haystack_sdk import parse_trio, parse_zinc, render_trio, render_zinc
 
 FIXTURES = Path(__file__).parent / "fixtures" / "golden_grids"
 
@@ -23,3 +23,13 @@ def test_zinc_round_trip(fixture_name: str) -> None:
     re_parsed = parse_zinc(re_rendered)
     assert re_parsed["rows"] == grid["rows"]
     assert [c["name"] for c in re_parsed["cols"]] == [c["name"] for c in grid["cols"]]
+
+
+@pytest.mark.parametrize("fixture_name", [p.name for p in FIXTURES.glob("*.trio")])
+def test_trio_round_trip(fixture_name: str) -> None:
+    """Parse a Trio fixture, render back to Trio, and re-parse — rows must match."""
+    original = (FIXTURES / fixture_name).read_text()
+    grid = parse_trio(original)
+    re_rendered = render_trio(grid)
+    re_parsed = parse_trio(re_rendered)
+    assert re_parsed["rows"] == grid["rows"]

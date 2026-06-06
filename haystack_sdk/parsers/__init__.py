@@ -41,12 +41,13 @@ def parse_grid(text: str, *, format: str) -> Grid:
 
 
 def iter_entities(text: str, *, format: str) -> Iterator[HaystackEntity]:
-    """Stream parsed entities one at a time.
+    """Iterate over parsed entities from a wire-format document.
 
-    For very large grids, prefer this over :func:`parse_grid` to avoid
-    materialising every row in memory at once. The Zinc and Trio parsers
-    yield rows incrementally; the JSON parser falls back to a buffered parse
-    and then yields, since JSON lacks a record separator.
+    Convenience wrapper around :func:`parse_grid` that yields each row dict
+    individually. The full grid is buffered in memory before iteration begins —
+    all three wire formats (Zinc, Trio, JSON) are fully parsed upfront.
+
+    ``format`` must be one of ``"zinc"``, ``"trio"``, or ``"json"``.
     """
     grid = parse_grid(text, format=format)
     yield from grid["rows"]

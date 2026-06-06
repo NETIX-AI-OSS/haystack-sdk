@@ -10,6 +10,7 @@ via ``scripts/generate_vocabulary.py`` — do not hand-edit the generated
 
 from __future__ import annotations
 
+import functools
 from collections.abc import Iterator
 from dataclasses import dataclass, field
 
@@ -70,7 +71,7 @@ class Vocabulary:
     def __contains__(self, name: object) -> bool:
         if not isinstance(name, str):
             return False
-        return any(t.name == name for t in self.tags)
+        return self.get(name) is not None
 
     def get(self, name: str) -> TagDef | None:
         for tag in self.tags:
@@ -78,5 +79,9 @@ class Vocabulary:
                 return tag
         return None
 
-    def names(self) -> frozenset[str]:
+    @functools.cached_property
+    def _names_cache(self) -> frozenset[str]:
         return frozenset(t.name for t in self.tags)
+
+    def names(self) -> frozenset[str]:
+        return self._names_cache

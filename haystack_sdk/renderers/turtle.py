@@ -11,9 +11,16 @@ from __future__ import annotations
 from collections.abc import Callable, Sequence
 from typing import Any
 
-BRICK_PREFIX = "https://brickschema.org/schema/Brick#"
+from haystack_sdk.brick import BRICK_PREFIX
+
 NETIX_PREFIX = "https://netix.ai/schema#"
 
+# Default prefix/context dict shared with the JSON-LD renderer.
+DEFAULT_PREFIXES: dict[str, str] = {
+    "brick": BRICK_PREFIX,
+    "netix": NETIX_PREFIX,
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+}
 
 # resolve_class returns (brick_class_qname, confidence) for a sorted marker list,
 # or (None, 0.0) if no mapping is known.
@@ -37,11 +44,7 @@ def render_turtle(
         resolve_class: Callback that maps a sorted marker list to a Brick class.
         extra_prefixes: Extra ``@prefix`` declarations to emit.
     """
-    prefixes = {
-        "brick": BRICK_PREFIX,
-        "netix": NETIX_PREFIX,
-        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    }
+    prefixes = dict(DEFAULT_PREFIXES)
     if extra_prefixes:
         prefixes.update(extra_prefixes)
 
