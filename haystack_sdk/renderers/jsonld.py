@@ -2,12 +2,9 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
 from typing import Any
 
-from haystack_sdk.renderers.turtle import BRICK_PREFIX, NETIX_PREFIX, _strip_id  # internal reuse
-
-ResolveBrickClass = Callable[[Sequence[str]], tuple[str | None, float]]
+from haystack_sdk.renderers.turtle import DEFAULT_PREFIXES, ResolveBrickClass, _markers, _strip_id  # internal reuse
 
 
 def render_jsonld(
@@ -17,11 +14,7 @@ def render_jsonld(
     extra_context: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Render Haystack tag dicts as a JSON-LD ``@graph``."""
-    context: dict[str, str] = {
-        "brick": BRICK_PREFIX,
-        "netix": NETIX_PREFIX,
-        "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    }
+    context: dict[str, str] = dict(DEFAULT_PREFIXES)
     if extra_context:
         context.update(extra_context)
 
@@ -30,7 +23,7 @@ def render_jsonld(
         entity_id = entity.get("id")
         if entity_id is None:
             continue
-        markers = sorted(k for k, v in entity.items() if v == "m:")
+        markers = _markers(entity)
         if not markers:
             continue
         brick_class, confidence = resolve_class(markers)

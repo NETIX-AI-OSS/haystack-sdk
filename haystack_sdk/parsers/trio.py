@@ -9,10 +9,10 @@ Each entity is separated by ``\\n---\\n``. Within a block, each line is either:
 
 from __future__ import annotations
 
-import json
 import re
 from typing import Any
 
+from haystack_sdk.parsers._common import _parse_val_common
 from haystack_sdk.types import Column, Grid
 
 
@@ -50,26 +50,6 @@ def _parse_block(block: str) -> dict[str, Any]:
     return row
 
 
-def _parse_number_or_str(val: str) -> Any:
-    try:
-        tok = val.split(" ")[0]
-        return float(tok) if "." in tok else int(tok)
-    except ValueError:
-        return val
-
-
 def _parse_val(val: str) -> Any:
-    if not val or val == "M":
-        return "m:"
-    if val == "N":
-        return None
-    if val in ("T", "true", "F", "false"):
-        return val in ("T", "true")
-    if val.startswith("@"):
-        return f"r:{val[1:]}"
-    if val.startswith('"') and val.endswith('"'):
-        try:
-            return json.loads(val)
-        except json.JSONDecodeError:
-            return val[1:-1]
-    return _parse_number_or_str(val)
+    # Trio: empty/"M" → marker, "N" → None
+    return _parse_val_common(val, empty_is_marker=True, m_is_marker=False)

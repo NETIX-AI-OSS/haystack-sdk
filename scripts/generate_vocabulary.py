@@ -101,20 +101,20 @@ def constant_name(tag_name: str) -> str:
 
 def render_tagdef(row: TagRow) -> str:
     parts = [
-        f'name={row.name!r}',
-        f'display_name={row.display_name!r}',
-        f'kind={row.kind}',
-        f'namespace={row.namespace!r}',
-        f'doc={row.doc!r}',
+        f"name={row.name!r}",
+        f"display_name={row.display_name!r}",
+        f"kind={row.kind}",
+        f"namespace={row.namespace!r}",
+        f"doc={row.doc!r}",
     ]
     if row.supertype:
-        parts.append(f'supertype={row.supertype!r}')
+        parts.append(f"supertype={row.supertype!r}")
     if row.unit_quantity:
-        parts.append(f'unit_quantity={row.unit_quantity!r}')
+        parts.append(f"unit_quantity={row.unit_quantity!r}")
     return "TagDef(" + ", ".join(parts) + ")"
 
 
-def render_module(json_stem: str, vocab_name: str, constant_var: str, rows: list[TagRow]) -> str:
+def render_module(json_stem: str, vocab_name: str, rows: list[TagRow]) -> str:
     """Render a vocabulary module.
 
     Each pack module exports a single :class:`Vocabulary` named ``PACK`` plus
@@ -123,10 +123,9 @@ def render_module(json_stem: str, vocab_name: str, constant_var: str, rows: list
     otherwise shadow the pack constant named ``RETAIL_MALL``). ``__init__.py``
     re-exports ``PACK`` under the public pack constant name.
 
-    ``constant_var`` and ``vocab_name`` are kept as parameters so the generated
-    Vocabulary has its semantic name attached.
+    ``vocab_name`` is embedded in the generated Vocabulary so the object carries
+    its semantic name at runtime.
     """
-    del constant_var  # name re-exported in vocabulary/__init__.py instead
     lines: list[str] = [HEADER.format(json_name=json_stem)]
 
     used_names: set[str] = {"PACK"}  # reserve the pack-level export
@@ -177,18 +176,21 @@ def _ruff_format(text: str) -> str:
             check=True,
         ).stdout
         return formatted
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        # ruff not on PATH (e.g. running outside the dev environment) — return as-is.
+    except OSError:
+        # ruff not on PATH or subprocess error — return as-is.
+        return text
+    except subprocess.CalledProcessError:
+        # ruff exited non-zero — return as-is.
         return text
 
 
 def main(check_only: bool = False) -> int:
     failures: list[str] = []
-    for json_stem, py_stem, constant_var, vocab_name in PACKS:
+    for json_stem, py_stem, _constant_var, vocab_name in PACKS:
         json_path = DATA_DIR / f"{json_stem}.json"
         py_path = OUT_DIR / f"{py_stem}.py"
         rows = load_rows(json_path)
-        rendered = _ruff_format(render_module(json_stem, vocab_name, constant_var, rows))
+        rendered = _ruff_format(render_module(json_stem, vocab_name, rows))
         if check_only:
             if not py_path.exists() or py_path.read_text() != rendered:
                 failures.append(str(py_path))

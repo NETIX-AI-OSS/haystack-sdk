@@ -34,10 +34,6 @@ from typing import Any
 class FilterNode:
     """Base class for filter AST nodes."""
 
-    def evaluate(self, entity: dict[str, Any], resolver: Callable[[str], dict[str, Any] | None] | None = None) -> bool:
-        """Evaluate this AST node against an entity dict."""
-        return evaluate_filter(entity, self, resolver=resolver)
-
 
 @dataclass
 class MarkerNode(FilterNode):
@@ -314,7 +310,7 @@ def _normalize_val(val: Any) -> Any:
 def _numeric_cmp(a: Any, b: Any, op: Callable[[Any, Any], bool]) -> bool:
     try:
         return op(float(a), float(b))
-    except (TypeError, ValueError):
+    except TypeError, ValueError:
         return False
 
 

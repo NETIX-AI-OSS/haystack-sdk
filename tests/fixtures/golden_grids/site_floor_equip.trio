@@ -1,0 +1,19 @@
+id: @s1
+dis: Main Site
+site
+---
+id: @b1
+dis: Building A
+building
+siteRef: @s1
+---
+id: @e1
+dis: AHU-1
+equip
+ahu
+siteRef: @s1
+---
+id: @p1
+dis: AHU-1 Discharge Temp
+equipRef: @e1
+siteRef: @s1

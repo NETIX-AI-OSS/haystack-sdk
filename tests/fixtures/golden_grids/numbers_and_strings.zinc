@@ -1,0 +1,4 @@
+ver:"3.0"
+id,dis,temp,flow,active,note
+@s1,"Main HQ",21.5,100,T,"Hello, world"
+@s2,"Annex",N,0,F,N
