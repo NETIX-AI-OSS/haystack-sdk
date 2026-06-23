@@ -74,6 +74,23 @@ class TestTurtleRenderer:
         assert "netix:42" in out
         assert "brick:Air_Temperature_Sensor" in out
 
+    def test_fuzzy_match_comment_keeps_valid_separator(self) -> None:
+        # Regression: a fuzzy-match note must trail the ';'/'.' separator. A
+        # Turtle '#' comment runs to end-of-line, so a note placed before the
+        # separator swallows it and yields invalid RDF.
+        tags = [{"id": "r:42", "point": "m:", "sensor": "m:", "air": "m:", "temp": "m:", "equipRef": "r:7"}]
+        out = render_turtle(tags, lambda markers: ("brick:Air_Temperature_Sensor", 0.83))
+        assert "# fuzzy match (0.83)" in out
+        # On any line carrying the fuzzy-match note, the ';'/'.' separator must
+        # come *before* the comment (a '#' comment runs to end-of-line).
+        for line in out.splitlines():
+            idx = line.find("# fuzzy match")
+            if idx != -1:
+                before = line[:idx].rstrip()
+                assert before.endswith((";", ".")), f"separator swallowed by comment: {line!r}"
+        # The type line keeps its separator before the note.
+        assert any(";  # fuzzy match (0.83)" in line for line in out.splitlines())
+
 
 class TestJsonLdRenderer:
     def _resolver(self, markers):

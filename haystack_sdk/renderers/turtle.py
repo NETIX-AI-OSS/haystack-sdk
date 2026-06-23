@@ -78,9 +78,11 @@ def _strip_id(raw: str) -> str:
 
 
 def _emit_entity(entity_id: str, entity: dict[str, Any], brick_class: str, confidence: float) -> list[str]:
-    triples = [
-        f"    a {brick_class}" if confidence >= 1.0 else f"    a {brick_class}  # fuzzy match ({confidence:.2f})"
-    ]
+    # The fuzzy-match note is emitted as a trailing comment *after* the statement
+    # separator. A Turtle `#` comment runs to end-of-line, so placing it before
+    # the `;`/`.` would swallow the separator and produce invalid RDF.
+    type_comment = "" if confidence >= 1.0 else f"  # fuzzy match ({confidence:.2f})"
+    triples = [f"    a {brick_class}"]
 
     for ref_key, brick_predicate in (("equipRef", "brick:isPointOf"), ("siteRef", "brick:isPartOf")):
         ref_val = entity.get(ref_key)
@@ -91,6 +93,7 @@ def _emit_entity(entity_id: str, entity: dict[str, Any], brick_class: str, confi
     block = [f"netix:{entity_id}"]
     for i, triple in enumerate(triples):
         sep = " ;" if i < len(triples) - 1 else " ."
-        block.append(f"{triple}{sep}")
+        comment = type_comment if i == 0 else ""
+        block.append(f"{triple}{sep}{comment}")
     block.append("")
     return block
