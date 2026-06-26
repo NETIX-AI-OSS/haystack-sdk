@@ -14,3 +14,10 @@ repos:
         language: system
         files: ^haystack_sdk/vocabulary/(data/.*\.json|.*\.py)$
         pass_filenames: false
+
+      - id: mypy
+        name: mypy
+        entry: uv run mypy haystack_sdk
+        language: system
+        pass_filenames: false
+

@@ -22,10 +22,16 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "ruff>=0.6",
-    "mypy>=1.10",
     "black>=24.0",
 ]
 brick-validation = ["brickschema>=0.7"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.10",
+    "pre-commit>=4.3.0",
+]
+
 
 [project.urls]
 Homepage = "https://github.com/NETIX-AI-OSS/haystack-sdk"
