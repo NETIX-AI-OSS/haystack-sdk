@@ -4,11 +4,7 @@ from __future__ import annotations
 
 from typing import Any, TypedDict
 
-# A Haystack value is one of:
-#   - None (Null)
-#   - bool
-#   - int | float
-#   - str  (plain string or type-prefixed: "m:", "n:42 kW", "r:abc Pump-1", "c:lat,lng", etc.)
+# A Haystack value: None, bool, int|float, or str (optionally type-prefixed).
 HaystackValue = None | bool | int | float | str
 
 # An entity is a dict of name → value.

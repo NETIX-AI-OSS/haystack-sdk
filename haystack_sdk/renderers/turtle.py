@@ -22,8 +22,7 @@ DEFAULT_PREFIXES: dict[str, str] = {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 }
 
-# resolve_class returns (brick_class_qname, confidence) for a sorted marker list,
-# or (None, 0.0) if no mapping is known.
+# resolve_class returns (qname, confidence), or (None, 0.0) if unmapped.
 ResolveBrickClass = Callable[[Sequence[str]], tuple[str | None, float]]
 
 
@@ -78,9 +77,7 @@ def _strip_id(raw: str) -> str:
 
 
 def _emit_entity(entity_id: str, entity: dict[str, Any], brick_class: str, confidence: float) -> list[str]:
-    # The fuzzy-match note is emitted as a trailing comment *after* the statement
-    # separator. A Turtle `#` comment runs to end-of-line, so placing it before
-    # the `;`/`.` would swallow the separator and produce invalid RDF.
+    # Fuzzy-match note must follow ';'/'.'; '#' comments run to end-of-line.
     type_comment = "" if confidence >= 1.0 else f"  # fuzzy match ({confidence:.2f})"
     triples = [f"    a {brick_class}"]
 
