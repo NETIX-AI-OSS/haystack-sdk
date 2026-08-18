@@ -1,9 +1,4 @@
-"""Haystack 4 JSON parser.
-
-Input is standard JSON with a ``{meta, cols, rows}`` shape. Values may carry
-type prefixes (``m:``, ``n:``, ``r:``, etc.) — they are preserved verbatim
-because downstream callers usually want the typed form.
-"""
+"""Haystack 4 JSON parser; type-prefixed values (``m:``, ``n:``, ``r:``, etc.) are preserved verbatim since callers usually want the typed form."""
 
 from __future__ import annotations
 

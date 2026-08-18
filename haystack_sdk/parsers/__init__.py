@@ -1,7 +1,4 @@
-"""Wire-format parsers — Zinc, Trio, and Haystack 4 JSON.
-
-All parsers return a :class:`haystack_sdk.types.Grid` dict.
-"""
+"""Wire-format parsers — Zinc, Trio, and Haystack 4 JSON — all returning a :class:`haystack_sdk.types.Grid` dict."""
 
 from __future__ import annotations
 
@@ -27,10 +24,7 @@ class ParseError(ValueError):
 
 
 def parse_grid(text: str, *, format: str) -> Grid:
-    """Dispatch parse based on ``format``.
-
-    ``format`` must be one of ``"zinc"``, ``"trio"``, or ``"json"``.
-    """
+    """Dispatch parse based on ``format`` (one of ``"zinc"``, ``"trio"``, ``"json"``)."""
     if format == "zinc":
         return parse_zinc(text)
     if format == "trio":
@@ -41,13 +35,6 @@ def parse_grid(text: str, *, format: str) -> Grid:
 
 
 def iter_entities(text: str, *, format: str) -> Iterator[HaystackEntity]:
-    """Iterate over parsed entities from a wire-format document.
-
-    Convenience wrapper around :func:`parse_grid` that yields each row dict
-    individually. The full grid is buffered in memory before iteration begins —
-    all three wire formats (Zinc, Trio, JSON) are fully parsed upfront.
-
-    ``format`` must be one of ``"zinc"``, ``"trio"``, or ``"json"``.
-    """
+    """Yield each parsed row dict from a wire-format document; the full grid is buffered in memory before iteration begins."""
     grid = parse_grid(text, format=format)
     yield from grid["rows"]

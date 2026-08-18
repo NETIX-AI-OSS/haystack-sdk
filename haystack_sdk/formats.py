@@ -1,9 +1,4 @@
-"""Scalar encoding helpers shared across renderers.
-
-Used internally by the format-specific encoders in ``haystack_sdk.renderers``.
-The public renderer surface lives in that subpackage; this module is kept
-small and dependency-free.
-"""
+"""Scalar encoding helpers used internally by the format-specific encoders in ``haystack_sdk.renderers``."""
 
 from __future__ import annotations
 
@@ -21,16 +16,7 @@ _ZINC_ESCAPE = str.maketrans(
 
 
 def encode_scalar_json(value: Any) -> Any:
-    """Encode a Python value as a Haystack 4 JSON scalar.
-
-    Haystack 4 JSON uses type-prefixed strings for typed values:
-        Marker  -> "m:"
-        Bool    -> True / False  (native JSON)
-        Number  -> "n:<val> [unit]"
-        Str     -> "s:<val>"  (only when ambiguous; plain strings are fine)
-        Ref     -> "r:<val> [dis]"
-        Coord   -> "c:<lat>,<lng>"
-    """
+    """Encode a Python value as a Haystack 4 JSON scalar, using type-prefixed strings (``n:``, ``r:``, ``c:``, etc.) for typed values."""
     if value is None:
         return None
     if isinstance(value, bool):

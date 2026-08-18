@@ -1,8 +1,4 @@
-"""haystack-sdk — Project Haystack 4 SDK.
-
-Pure-Python, zero-runtime-dependency primitives for Haystack 4 wire formats,
-filter expressions, vocabulary, and Brick Schema mapping.
-"""
+"""haystack-sdk — pure-Python, zero-dependency Haystack 4 wire formats, filters, vocabulary, and Brick Schema mapping."""
 
 from __future__ import annotations
 

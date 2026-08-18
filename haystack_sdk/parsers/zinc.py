@@ -1,15 +1,4 @@
-"""Zinc parser — Haystack 4 spec-compliant subset.
-
-Parses the most common Zinc constructs used by NETIX services:
-    - ``ver:"3.0"`` meta line
-    - column header
-    - Markers (``M``), Null (``N``), Bool (``T``/``F``)
-    - Numbers (``42``, ``-3.14``, ``42 kW``)
-    - Strings (``"hello"`` with escape sequences)
-    - Refs (``@foo``, ``@foo "Display Name"``)
-
-Edge cases not handled: nested grids, lists, dicts, multi-line records.
-"""
+"""Zinc parser for the common constructs used by NETIX services; does not handle nested grids, lists, dicts, or multi-line records."""
 
 from __future__ import annotations
 

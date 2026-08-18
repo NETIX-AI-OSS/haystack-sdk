@@ -15,11 +15,7 @@ def render_json(grid: dict[str, Any]) -> str:
 
 
 def tags_to_json_grid(tag_dicts: list[dict[str, Any]], meta: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Convert a list of tag dicts into a Haystack 4 JSON-shaped grid dict.
-
-    Does not serialise — returns the Python object. Useful when the caller
-    will JSON-encode it via DRF, FastAPI, etc.
-    """
+    """Convert tag dicts into a Haystack 4 JSON-shaped grid dict — returns the Python object, does not serialize."""
     if not tag_dicts:
         return {"meta": {"ver": "3.0"}, "cols": [], "rows": []}
 

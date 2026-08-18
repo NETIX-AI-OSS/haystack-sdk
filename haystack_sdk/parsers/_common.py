@@ -21,18 +21,7 @@ def _parse_val_common(
     empty_is_marker: bool,
     m_is_marker: bool,
 ) -> Any:
-    """Parse the shared value token logic for Zinc and Trio.
-
-    The two parsers differ only in which sentinel tokens map to marker vs. None:
-
-    - Zinc: empty / ``"N"`` → ``None``; ``"M"`` → ``"m:"``
-      → pass ``empty_is_marker=False, m_is_marker=True``
-    - Trio: empty / ``"M"`` → ``"m:"``; ``"N"`` → ``None``
-      → pass ``empty_is_marker=True, m_is_marker=False``
-
-    The bool, ref, quoted-string, and number branches are identical across both
-    formats and are handled here.
-    """
+    """Parse a value token shared by Zinc and Trio; the two formats differ only in which sentinel maps to marker vs. None, via the two flags."""
     if not val:
         return "m:" if empty_is_marker else None
     if val == "M":

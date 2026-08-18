@@ -1,13 +1,4 @@
-"""Brick Schema class registry + tag-set → class resolver.
-
-The registry is bundled as a static JSON resource. It maps Haystack marker
-combinations to Brick class QNames (e.g. ``brick:Air_Temperature_Sensor``).
-
-For *equip*-level mappings (``equip-ahu``, ``equip-vav``, etc.) the canonical
-source of truth is the asset-service ``AssetClass.brick_class`` column —
-this registry only covers *point*-level mappings that are universal across
-deployments.
-"""
+"""Brick Schema class registry + resolver; covers only universal *point*-level mappings — *equip*-level mappings live in asset-service's ``AssetClass.brick_class``."""
 
 from __future__ import annotations
 
@@ -74,12 +65,7 @@ def find_brick_class(
     extra: Sequence[BrickClass] = (),
     min_confidence: float = 0.5,
 ) -> tuple[str | None, float]:
-    """Resolve markers to a Brick class.
-
-    Returns ``(qname, confidence)`` or ``(None, 0.0)`` if no match meets
-    ``min_confidence``. ``extra`` lets callers inject org-specific mappings
-    (e.g. ``AssetClass.brick_class`` rows) without mutating global state.
-    """
+    """Resolve markers to a Brick class, returning ``(None, 0.0)`` below ``min_confidence``; ``extra`` injects org-specific mappings without global mutation."""
     sorted_markers = sorted(markers)
     candidates = list(_CLASSES) + list(extra)
 
@@ -101,10 +87,5 @@ def find_brick_class(
 
 
 def validate_brick_class(qname: str) -> bool:
-    """Return True if *qname* is a registered Brick class.
-
-    Note: this checks the local registry only. Use the optional
-    ``brickschema`` package for SHACL-based deep validation against the
-    upstream ontology.
-    """
+    """Return True if *qname* is in the local registry; use the optional ``brickschema`` package for deep SHACL validation."""
     return any(entry.brick_class == qname for entry in _CLASSES)

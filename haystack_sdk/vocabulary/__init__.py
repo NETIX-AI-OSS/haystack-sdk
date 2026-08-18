@@ -1,11 +1,4 @@
-"""Versioned Haystack 4 vocabulary packs.
-
-Each pack is a frozen :class:`Vocabulary` of :class:`TagDef` records. Packs
-are generated from JSON sources under ``haystack_sdk/vocabulary/data/``.
-
-Use :func:`get_tag_def` for lookup by name across all packs, and
-:func:`validate_markers` to verify that a marker set is known.
-"""
+"""Versioned Haystack 4 vocabulary packs; use :func:`get_tag_def` for cross-pack lookup and :func:`validate_markers` to check a marker set."""
 
 from __future__ import annotations
 
@@ -52,11 +45,7 @@ ALL_PACKS: tuple[Vocabulary, ...] = (
 
 
 def get_tag_def(name: str) -> TagDef | None:
-    """Find a tag definition by name across all packs.
-
-    Packs are searched in declaration order; the first match wins. Returns
-    ``None`` if the tag is not in any pack.
-    """
+    """Find a tag definition by name across all packs, searched in declaration order (first match wins); ``None`` if not found."""
     for pack in ALL_PACKS:
         tag = pack.get(name)
         if tag is not None:
@@ -77,11 +66,7 @@ class ValidationResult:
 
 
 def validate_markers(names: set[str] | frozenset[str], *, extra: set[str] | None = None) -> ValidationResult:
-    """Classify each name as known (present in any pack) or unknown.
-
-    ``extra`` is an optional set of additional names to treat as known —
-    e.g. per-org custom tags from a service-side store.
-    """
+    """Classify each name as known (present in any pack) or unknown; ``extra`` adds names to treat as known, e.g. per-org custom tags."""
     all_known: set[str] = set()
     for pack in ALL_PACKS:
         all_known.update(pack.names())

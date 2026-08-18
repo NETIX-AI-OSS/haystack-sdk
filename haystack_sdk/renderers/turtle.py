@@ -1,10 +1,4 @@
-"""Turtle (RDF) renderer for Brick Schema export.
-
-Builds Turtle triples from Haystack tag dicts plus a Brick-class resolver.
-Unlike the Zinc/Trio/JSON renderers, this consumes a list of tag dicts and a
-class-resolver callback so the SDK stays decoupled from any specific Brick
-storage backend.
-"""
+"""Turtle (RDF) renderer for Brick Schema export; takes a class-resolver callback so the SDK stays decoupled from any Brick storage backend."""
 
 from __future__ import annotations
 
@@ -32,17 +26,7 @@ def render_turtle(
     *,
     extra_prefixes: dict[str, str] | None = None,
 ) -> str:
-    """Render Haystack tag dicts to Turtle RDF.
-
-    Each entity must carry an ``id`` key (the asset/entity identifier). The
-    function emits ``rdf:type`` plus standard containment triples
-    (``brick:isPointOf``, ``brick:isPartOf``) when refs are present.
-
-    Args:
-        tag_dicts: Haystack entity dicts.
-        resolve_class: Callback that maps a sorted marker list to a Brick class.
-        extra_prefixes: Extra ``@prefix`` declarations to emit.
-    """
+    """Render Haystack tag dicts (each needing an ``id`` key) to Turtle RDF, emitting ``rdf:type`` plus containment triples when refs are present."""
     prefixes = dict(DEFAULT_PREFIXES)
     if extra_prefixes:
         prefixes.update(extra_prefixes)

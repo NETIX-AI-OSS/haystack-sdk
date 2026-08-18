@@ -1,12 +1,4 @@
-"""Haystack Ref parsing and validation.
-
-A Ref is an identifier prefixed with ``@``. Format::
-
-    @<id> [<dis>]
-
-Where ``<id>`` is alphanumeric + ``_.-:`` and ``<dis>`` is an optional display
-string. In the typed JSON form refs serialize as ``r:<id> [dis]``.
-"""
+"""Haystack Ref parsing and validation — an ``@``-prefixed id with an optional display string, serializing as ``r:<id> [dis]`` in typed JSON."""
 
 from __future__ import annotations
 
@@ -40,16 +32,7 @@ class Ref:
 
 
 def parse_ref(value: str) -> Ref:
-    """Parse a Haystack ref from any wire encoding.
-
-    Accepts::
-
-        "@abc"               → Ref(id="abc")
-        "@abc Pump-1"        → Ref(id="abc", dis="Pump-1")
-        '@abc "Pump-1"'      → Ref(id="abc", dis="Pump-1")
-        "r:abc"              → Ref(id="abc")
-        "r:abc Pump-1"       → Ref(id="abc", dis="Pump-1")
-    """
+    """Parse a Haystack ref from any wire encoding (``@abc``, ``@abc Pump-1``, or ``r:abc``)."""
     raw = value.strip()
     if raw.startswith("r:"):
         body = raw[2:]

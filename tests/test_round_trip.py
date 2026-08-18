@@ -1,8 +1,4 @@
-"""Golden-grid round-trip tests.
-
-Parse → render → re-parse must yield equal row dicts. Locks the wire-format
-contract so future renderer/parser tweaks don't silently change output.
-"""
+"""Golden-grid round-trip tests — parse → render → re-parse must yield equal row dicts, locking the wire-format contract."""
 
 from __future__ import annotations
 

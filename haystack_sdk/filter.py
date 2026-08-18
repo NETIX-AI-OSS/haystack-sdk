@@ -1,22 +1,4 @@
-"""Haystack 4 filter expression parser and evaluator.
-
-Grammar::
-
-    filter      := orExpr
-    orExpr      := andExpr ("or" andExpr)*
-    andExpr     := term ("and" term)*
-    term        := "not" term | "(" orExpr ")" | cmp
-    cmp         := path (("==" | "!=" | "<" | ">" | "<=" | ">=") val)?
-    path        := name ("->" name)*
-    name        := ALPHA (ALPHA | DIGIT | "_")*
-    val         := ref | str | number | "true" | "false"
-    ref         := "@" REFCHAR+
-    str         := '"' ... '"'
-    number      := ["-"] DIGIT+ ["." DIGIT+]
-
-Path traversal across entities (``equipRef->siteRef``) requires a graph
-resolver; the default evaluator treats multi-element paths as no-match.
-"""
+"""Haystack 4 filter expression parser and evaluator; multi-element paths (``equipRef->siteRef``) need a resolver or they no-match."""
 
 from __future__ import annotations
 
@@ -68,11 +50,7 @@ class NotNode(FilterNode):
 
 @dataclass
 class FilterAST:
-    """Parsed filter result + convenience properties.
-
-    ``markers`` and ``refs`` extract top-level flat predicates (useful for
-    simple legacy callers); the full expression is in ``node``.
-    """
+    """Parsed filter result; ``markers``/``refs`` are flat top-level predicates for simple legacy callers, ``node`` is the full expression."""
 
     node: FilterNode | None = None
     markers: list[str] = field(default_factory=list)
@@ -237,12 +215,7 @@ def evaluate_filter(
     *,
     resolver: Callable[[str], dict[str, Any] | None] | None = None,
 ) -> bool:
-    """Evaluate a parsed filter AST against an entity dict.
-
-    ``resolver`` is an optional callback that resolves a ref string
-    (e.g. ``"@equip1"``) to another entity dict, enabling path traversals
-    like ``equipRef->siteRef``.
-    """
+    """Evaluate a parsed filter AST against an entity dict; ``resolver`` optionally resolves refs to enable path traversals like ``equipRef->siteRef``."""
     if isinstance(node, MarkerNode):
         return entity.get(node.name) is not None
     if isinstance(node, CmpNode):
