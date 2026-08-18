@@ -18,11 +18,7 @@ class Column(TypedDict):
 
 
 class Grid(TypedDict):
-    """Haystack 4 grid: meta + columns + rows.
-
-    The wire encoding uses ``ver:"3.0"`` because Project Haystack 4 retained
-    the v3 grid format. See https://project-haystack.org/doc/docHaystack/Grids.
-    """
+    """Haystack 4 grid (meta + columns + rows); wire encoding uses ``ver:"3.0"`` since Haystack 4 retained the v3 grid format."""
 
     meta: dict[str, Any]
     cols: list[Column]

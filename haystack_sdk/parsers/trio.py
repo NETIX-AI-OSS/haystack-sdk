@@ -1,11 +1,4 @@
-"""Trio parser — record-separated key:value blocks.
-
-Each entity is separated by ``\\n---\\n``. Within a block, each line is either:
-
-    - ``key: value``
-    - bare ``key`` (interpreted as a marker, value ``"m:"``)
-    - comment (``// ...``) or blank line (skipped)
-"""
+"""Trio parser — entities separated by ``\\n---\\n``, each line a ``key: value``, bare marker ``key``, or skipped comment/blank line."""
 
 from __future__ import annotations
 

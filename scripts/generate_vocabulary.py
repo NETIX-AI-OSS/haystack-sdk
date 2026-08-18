@@ -1,11 +1,5 @@
 #!/usr/bin/env python
-"""Regenerate vocabulary .py files from their JSON sources.
-
-Reads each ``haystack_sdk/vocabulary/data/*.json`` and emits a sibling
-``.py`` file containing frozen dataclass constants and a ``Vocabulary``
-binding. Run as part of pre-commit; CI fails if the generated files
-diverge from the JSON sources.
-"""
+"""Regenerate vocabulary .py files from their JSON sources; run as part of pre-commit, CI fails if generated files diverge from sources."""
 
 from __future__ import annotations
 
@@ -78,10 +72,7 @@ def load_rows(path: Path) -> list[TagRow]:
 
 
 def constant_name(tag_name: str) -> str:
-    """Convert a tag name to a Python constant name.
-
-    ``equipType`` → ``EQUIP_TYPE``; ``co2`` → ``CO2``; ``ahu`` → ``AHU``.
-    """
+    """Convert a tag name to a Python constant name, e.g. ``equipType`` → ``EQUIP_TYPE``."""
     out: list[str] = []
     prev_lower = False
     for ch in tag_name:
@@ -115,17 +106,7 @@ def render_tagdef(row: TagRow) -> str:
 
 
 def render_module(json_stem: str, vocab_name: str, rows: list[TagRow]) -> str:
-    """Render a vocabulary module.
-
-    Each pack module exports a single :class:`Vocabulary` named ``PACK`` plus
-    one :class:`TagDef` constant per row. The ``PACK`` indirection avoids any
-    collision with tag-named constants (e.g. a tag named ``retailMall`` would
-    otherwise shadow the pack constant named ``RETAIL_MALL``). ``__init__.py``
-    re-exports ``PACK`` under the public pack constant name.
-
-    ``vocab_name`` is embedded in the generated Vocabulary so the object carries
-    its semantic name at runtime.
-    """
+    """Render a pack module; the ``PACK`` name indirection avoids collisions with tag-named constants (e.g. a tag ``retailMall`` vs ``RETAIL_MALL``)."""
     lines: list[str] = [HEADER.format(json_name=json_stem)]
 
     used_names: set[str] = {"PACK"}  # reserve the pack-level export
@@ -155,11 +136,7 @@ def render_module(json_stem: str, vocab_name: str, rows: list[TagRow]) -> str:
 
 
 def _ruff_format(text: str) -> str:
-    """Pipe text through ruff so generator output matches the lint config.
-
-    Runs both ``ruff check --fix`` (for isort + autofixes) and ``ruff format``
-    (for whitespace/formatting) so the result matches what CI expects.
-    """
+    """Pipe text through ``ruff check --fix`` and ``ruff format`` so generator output matches what CI expects."""
     try:
         fixed = subprocess.run(
             ["ruff", "check", "--fix", "--exit-zero", "--stdin-filename", "generated.py", "-"],

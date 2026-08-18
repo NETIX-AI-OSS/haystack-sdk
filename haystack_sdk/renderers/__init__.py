@@ -24,10 +24,7 @@ __all__ = [
 
 
 def render_grid(grid: dict[str, Any], *, format: str) -> str:
-    """Render a grid in the requested wire format.
-
-    ``format`` ∈ ``{"zinc", "trio", "json"}``.
-    """
+    """Render a grid in the requested wire format (``"zinc"``, ``"trio"``, or ``"json"``)."""
     if format == "zinc":
         return render_zinc(grid)
     if format == "trio":

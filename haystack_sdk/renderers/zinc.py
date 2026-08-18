@@ -33,10 +33,7 @@ def render_zinc(grid: dict[str, Any]) -> str:
 
 
 def tags_to_zinc(tag_dicts: list[dict[str, Any]], meta: dict[str, Any] | None = None) -> str:
-    """Convert a list of tag dicts directly to a Zinc string.
-
-    Convenience wrapper that builds a grid and renders it.
-    """
+    """Convert a list of tag dicts directly to a Zinc string."""
     if not tag_dicts:
         return 'ver:"3.0"\nempty\n'
 
