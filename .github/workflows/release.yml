@@ -9,7 +9,7 @@ permissions:
   contents: write
 jobs:
   release:
-    runs-on: build-only
+    runs-on: self-hosted
     permissions:
       contents: write
     steps:
