@@ -1,5 +1,49 @@
 # Changelog
 
+## Unreleased
+
+Tooling and packaging only; no public API change.
+
+- Added explicit workflow permissions to CI (security hardening).
+- Added a mypy pre-commit hook.
+- Declared the project venv for pyright in `pyproject.toml`.
+- Collapsed multi-line comments to single-line across the package.
+- Cleaned up docs, license headers and docstrings.
+- CI: migrated `ubuntu-latest` jobs to the `build-only` runner.
+
+## v1.0.2 — 2026-06-23
+
+> Reconstructed from git history on 2026-09-14; derived from commit subjects and diffs
+> rather than written at release time.
+
+### Fixed
+
+- Turtle export emitted the `;`/`.` statement separator *after* the inline
+  `# fuzzy match (NN)` note. A Turtle `#` comment runs to end of line, so the separator was
+  swallowed and every fuzzy-matched point (confidence < 1.0) produced invalid RDF that failed
+  `rdflib`/`brickschema` validation. The note is now emitted after the separator.
+
+### Changed
+
+- Platform audit pass: removed dead code, factored shared parser logic into
+  `haystack_sdk/parsers/_common.py` (used by both the Zinc and Trio parsers), simplified the
+  JSON-LD and Turtle renderers and the vocabulary base, and tidied
+  `scripts/generate_vocabulary.py`.
+- Expanded renderer, parser and round-trip test coverage, with new golden-grid fixtures.
+
+## v1.0.1 — 2026-06-07
+
+> Reconstructed from git history on 2026-09-14; derived from commit subjects and diffs
+> rather than written at release time.
+
+### Fixed
+
+- Removed a redundant `force-include` that produced duplicate entries in the built wheel.
+
+### Changed
+
+- Pinned `hatchling==1.30.1` for reproducible source builds.
+
 ## v1.0.0 — initial release
 
 Extracted Haystack 4 wire-format I/O, filter parser, vocabulary, and Brick mapping into a standalone, framework-agnostic Python package.
