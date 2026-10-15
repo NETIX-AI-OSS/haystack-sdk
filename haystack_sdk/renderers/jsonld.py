@@ -1,10 +1,17 @@
-"""JSON-LD renderer for Brick Schema export."""
+"""JSON-LD renderer for Brick Schema export; the same model as the Turtle renderer, so both parse to isomorphic graphs."""
 
 from __future__ import annotations
 
 from typing import Any
 
-from haystack_sdk.renderers.turtle import DEFAULT_PREFIXES, ResolveBrickClass, _markers, _strip_id  # internal reuse
+from haystack_sdk.renderers._brick_graph import (
+    DEFAULT_PREFIXES,
+    BrickNode,
+    ResolveBrickClass,
+    build_brick_nodes,
+    compact,
+    expand,
+)
 
 
 def render_jsonld(
@@ -13,34 +20,30 @@ def render_jsonld(
     *,
     extra_context: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    """Render Haystack tag dicts as a JSON-LD ``@graph``."""
+    """Render Haystack entity dicts as a JSON-LD ``@graph`` Brick model."""
     context: dict[str, str] = dict(DEFAULT_PREFIXES)
     if extra_context:
         context.update(extra_context)
-
-    graph: list[dict[str, Any]] = []
-    for entity in tag_dicts:
-        entity_id = entity.get("id")
-        if entity_id is None:
-            continue
-        markers = _markers(entity)
-        if not markers:
-            continue
-        brick_class, confidence = resolve_class(markers)
-        if brick_class is None:
-            continue
-
-        node: dict[str, Any] = {
-            "@id": f"netix:{_strip_id(str(entity_id))}",
-            "@type": brick_class,
-        }
-        for ref_key, ld_predicate in (("equipRef", "brick:isPointOf"), ("siteRef", "brick:isPartOf")):
-            ref_val = entity.get(ref_key)
-            if ref_val and isinstance(ref_val, str):
-                node[ld_predicate] = {"@id": f"netix:{_strip_id(ref_val)}"}
-        if confidence < 1.0:
-            node["netix:matchConfidence"] = confidence
-
-        graph.append(node)
-
+    graph = [_node(node, context) for node in build_brick_nodes(tag_dicts, resolve_class, context)]
     return {"@context": context, "@graph": graph}
+
+
+def _term(iri: str, context: dict[str, str]) -> str:
+    return compact(iri, context) or iri
+
+
+def _node(node: BrickNode, context: dict[str, str]) -> dict[str, Any]:
+    types = [_term(cls, context) for cls in node.types]
+    out: dict[str, Any] = {"@id": _term(node.iri, context), "@type": types[0] if len(types) == 1 else types}
+    if node.label is not None:
+        out["rdfs:label"] = node.label
+    for predicate, target in node.relations:
+        key = _term(expand(predicate, context), context)
+        value = {"@id": _term(target, context)}
+        existing = out.get(key)
+        out[key] = value if existing is None else [*(existing if isinstance(existing, list) else [existing]), value]
+    if node.suggested_class:
+        out["netix:suggestedClass"] = {"@id": _term(node.suggested_class, context)}
+    if node.confidence is not None:
+        out["netix:matchConfidence"] = {"@value": f"{node.confidence:.2f}", "@type": "xsd:decimal"}
+    return out

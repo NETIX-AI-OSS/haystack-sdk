@@ -2,22 +2,33 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable, Sequence
+import json
 from typing import Any
 
-from haystack_sdk.brick import BRICK_PREFIX
+from haystack_sdk.renderers._brick_graph import (
+    BRICK_CLASS_TAG,
+    DEFAULT_PREFIXES,
+    ENTITY_PREFIX,
+    NETIX_PREFIX,
+    BrickNode,
+    ResolveBrickClass,
+    build_brick_nodes,
+    compact,
+    expand,
+)
+from haystack_sdk.renderers._brick_graph import markers_of as _markers
+from haystack_sdk.renderers._brick_graph import strip_id as _strip_id
 
-NETIX_PREFIX = "https://netix.ai/schema#"
-
-# Default prefix/context dict shared with the JSON-LD renderer.
-DEFAULT_PREFIXES: dict[str, str] = {
-    "brick": BRICK_PREFIX,
-    "netix": NETIX_PREFIX,
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-}
-
-# resolve_class returns (qname, confidence), or (None, 0.0) if unmapped.
-ResolveBrickClass = Callable[[Sequence[str]], tuple[str | None, float]]
+__all__ = [
+    "BRICK_CLASS_TAG",
+    "DEFAULT_PREFIXES",
+    "ENTITY_PREFIX",
+    "NETIX_PREFIX",
+    "ResolveBrickClass",
+    "_markers",
+    "_strip_id",
+    "render_turtle",
+]
 
 
 def render_turtle(
@@ -26,55 +37,37 @@ def render_turtle(
     *,
     extra_prefixes: dict[str, str] | None = None,
 ) -> str:
-    """Render Haystack tag dicts (each needing an ``id`` key) to Turtle RDF, emitting ``rdf:type`` plus containment triples when refs are present."""
+    """Render Haystack entity dicts (each needing an ``id`` key) as a Brick model in Turtle; see ``_brick_graph`` for
+    how sites, spaces, equips and points become typed, related nodes.
+    """
     prefixes = dict(DEFAULT_PREFIXES)
     if extra_prefixes:
         prefixes.update(extra_prefixes)
 
     lines = [f"@prefix {p}: <{uri}> ." for p, uri in prefixes.items()] + [""]
-
-    for entity in tag_dicts:
-        entity_id = entity.get("id")
-        if entity_id is None:
-            continue
-        markers = _markers(entity)
-        if not markers:
-            continue
-        brick_class, confidence = resolve_class(markers)
-        if brick_class is None:
-            continue
-        lines.extend(_emit_entity(_strip_id(str(entity_id)), entity, brick_class, confidence))
-
+    for node in build_brick_nodes(tag_dicts, resolve_class, prefixes):
+        lines.extend(_emit_node(node, prefixes))
     return "\n".join(lines) + "\n"
 
 
-def _markers(entity: dict[str, Any]) -> list[str]:
-    return sorted(k for k, v in entity.items() if v == "m:")
+def _term(iri: str, prefixes: dict[str, str]) -> str:
+    return compact(iri, prefixes) or f"<{iri}>"
 
 
-def _strip_id(raw: str) -> str:
-    if raw.startswith("r:"):
-        raw = raw[2:]
-    if raw.startswith("@"):
-        raw = raw[1:]
-    return raw.split(" ", 1)[0]
+def _emit_node(node: BrickNode, prefixes: dict[str, str]) -> list[str]:
+    statements = ["a " + ", ".join(_term(cls, prefixes) for cls in node.types)]
+    if node.label is not None:
+        # A JSON string literal is also a valid Turtle STRING_LITERAL_QUOTE (same escapes, \uXXXX included).
+        statements.append(f"rdfs:label {json.dumps(node.label, ensure_ascii=False)}")
+    for predicate, target in node.relations:
+        statements.append(f"{_term(expand(predicate, prefixes), prefixes)} {_term(target, prefixes)}")
+    if node.suggested_class:
+        statements.append(f"netix:suggestedClass {_term(node.suggested_class, prefixes)}")
+    if node.confidence is not None:
+        statements.append(f'netix:matchConfidence "{node.confidence:.2f}"^^xsd:decimal')
 
-
-def _emit_entity(entity_id: str, entity: dict[str, Any], brick_class: str, confidence: float) -> list[str]:
-    # Fuzzy-match note must follow ';'/'.'; '#' comments run to end-of-line.
-    type_comment = "" if confidence >= 1.0 else f"  # fuzzy match ({confidence:.2f})"
-    triples = [f"    a {brick_class}"]
-
-    for ref_key, brick_predicate in (("equipRef", "brick:isPointOf"), ("siteRef", "brick:isPartOf")):
-        ref_val = entity.get(ref_key)
-        if ref_val and isinstance(ref_val, str):
-            stripped = _strip_id(ref_val)
-            triples.append(f"    {brick_predicate} netix:{stripped}")
-
-    block = [f"netix:{entity_id}"]
-    for i, triple in enumerate(triples):
-        sep = " ;" if i < len(triples) - 1 else " ."
-        comment = type_comment if i == 0 else ""
-        block.append(f"{triple}{sep}{comment}")
+    block = [_term(node.iri, prefixes)]
+    for i, statement in enumerate(statements):
+        block.append(f"    {statement}{' ;' if i < len(statements) - 1 else ' .'}")
     block.append("")
     return block
