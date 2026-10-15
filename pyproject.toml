@@ -1,6 +1,6 @@
 [project]
 name = "haystack-sdk"
-version = "1.0.2"
+version = "1.1.0"
 description = "Project Haystack 4 parser, renderer, vocabulary, and Brick mapping SDK for NETIX services"
 readme = "README.md"
 license = { text = "Apache-2.0" }
@@ -23,6 +23,7 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.6",
     "black>=24.0",
+    "brickschema>=0.7.9",
 ]
 brick-validation = ["brickschema>=0.7"]
 

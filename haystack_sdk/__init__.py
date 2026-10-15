@@ -5,8 +5,11 @@ from __future__ import annotations
 from haystack_sdk._version import __version__
 from haystack_sdk.brick import (
     BRICK_PREFIX,
+    BRICK_VERSION,
     BrickClass,
+    brick_class_kind,
     find_brick_class,
+    normalize_brick_class,
     validate_brick_class,
 )
 from haystack_sdk.filter import (
@@ -66,6 +69,7 @@ from haystack_sdk.vocabulary import (
 __all__ = [
     "ALL_PACKS",
     "BRICK_PREFIX",
+    "BRICK_VERSION",
     "CORE",
     "DISTRICT_COOLING",
     "FDD",
@@ -93,11 +97,13 @@ __all__ = [
     "ValidationResult",
     "Vocabulary",
     "__version__",
+    "brick_class_kind",
     "evaluate_filter",
     "find_brick_class",
     "get_tag_def",
     "is_ref",
     "iter_entities",
+    "normalize_brick_class",
     "normalize_ref",
     "parse_filter",
     "parse_grid",

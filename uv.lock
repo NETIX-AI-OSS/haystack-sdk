@@ -222,7 +222,7 @@ wheels = [
 
 [[package]]
 name = "haystack-sdk"
-version = "1.0.2"
+version = "1.1.0"
 source = { editable = "." }
 
 [package.optional-dependencies]
@@ -231,6 +231,7 @@ brick-validation = [
 ]
 dev = [
     { name = "black" },
+    { name = "brickschema" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "ruff" },
@@ -246,6 +247,7 @@ dev = [
 requires-dist = [
     { name = "black", marker = "extra == 'dev'", specifier = ">=24.0" },
     { name = "brickschema", marker = "extra == 'brick-validation'", specifier = ">=0.7" },
+    { name = "brickschema", marker = "extra == 'dev'", specifier = ">=0.7.9" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },

@@ -1,8 +1,37 @@
 # Changelog
 
-## Unreleased
+## v1.1.0 — Unreleased
 
-Tooling and packaging only; no public API change.
+### Fixed
+
+- Brick export (`render_turtle` / `render_jsonld`) now emits a model rather than a flat list: distinct site, building,
+  floor, space, equip and point nodes, points as `brick:isPointOf` their equip (or location), equips
+  `brick:hasLocation` their space/floor/site, locations `brick:isPartOf` their parent. `siteRef` on a point is no
+  longer rendered as `brick:isPartOf`, and a node is never related to itself.
+- Unmapped or unconfident points are no longer dropped from the export, or typed with a guessed class: they are
+  typed `brick:Point` / `Sensor` / `Command` / `Setpoint` / `Alarm` with `netix:suggestedClass` and
+  `netix:matchConfidence`.
+- `find_brick_class` no longer fails every historized point: the most specific mapping whose markers are all present
+  scores 1.0, and points and equipment only resolve to their own kind.
+- Four registry classes that do not exist in Brick 1.4 now map to ones that do: `Chilled_Water_Valve_Command` and
+  `Hot_Water_Valve_Command` → `Valve_Position_Command`, `Fan_On_Off_Command` → `Start_Stop_Command`,
+  `UPS` → `Electrical_Equipment`.
+
+### Added
+
+- `brickClass` entity tag to pin an equip's or point's Brick class (ignored unless it is a Brick 1.4 class of the
+  right kind).
+- `BRICK_VERSION`, `normalize_brick_class` and `brick_class_kind`, backed by an index of the Brick 1.4.4 ontology
+  (`scripts/generate_brick_classes.py`). `validate_brick_class` now accepts any class of that ontology.
+- A SHACL test that validates both exports against Brick 1.4 (`brickschema` joins the `dev` extra).
+
+### Changed
+
+- Entity IRIs move from `netix:<id>` to the `bldg:` namespace (`https://netix.ai/entity#`); `rec`, `rdfs` and `xsd`
+  join the default prefixes. `netix:matchConfidence` is an `xsd:decimal` in both formats and the Turtle
+  `# fuzzy match` comment is gone.
+
+### Tooling
 
 - Added explicit workflow permissions to CI (security hardening).
 - Added a mypy pre-commit hook.
