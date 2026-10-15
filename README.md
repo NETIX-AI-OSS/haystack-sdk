@@ -55,12 +55,13 @@ graph, and it validates against the Brick 1.4 SHACL shapes):
 
 | Entity markers | Brick node | Relations |
 |---|---|---|
-| `site` / `building` / `floor` / `space` | `rec:Site, brick:Site` / `rec:Building, brick:Building` / `rec:Level, brick:Floor` / `rec:Space, brick:Space` | `brick:isPartOf` its `siteRef` / `floorRef` |
+| `site` / `building` / `floor` / `space` | `rec:Site, brick:Site` / `rec:Building, brick:Building` / `rec:Level, brick:Floor` / `rec:Space, brick:Space` | `brick:isPartOf` its `floorRef` / `siteRef`, where Brick allows it (a floor only inside a building) |
 | `equip` (or `device`) | `brickClass` when it is a Brick 1.4 equipment class, else the registry match, else `brick:Equipment` | `brick:isPartOf` its `equipRef`, `brick:hasLocation` its `spaceRef` → `floorRef` → `siteRef` |
 | `point` | the registry match at confidence 1.0, else `brick:Sensor` / `Command` / `Setpoint` / `Alarm` / `Point` plus `netix:suggestedClass` and `netix:matchConfidence` | `brick:isPointOf` its `equipRef`, else its most specific location |
 
-Ids are minted in the `bldg:` namespace (override it with `extra_prefixes={"bldg": ...}`). A reference is emitted as
-given, so pass the referenced entities too when the model must be closed.
+Ids are minted in the `bldg:` namespace (override it with `extra_prefixes={"bldg": ...}`). A relation never points at
+the entity itself or at an entity Brick forbids there; a reference to an entity outside the input is emitted as given,
+so pass the referenced entities too when the model must be closed.
 
 `find_brick_class` scores 1.0 for an exact marker match or for the single most specific mapping whose markers are all
 present, so `his`, `cur`, `writable` and inherited equipment markers do not block a match; a point only ever resolves

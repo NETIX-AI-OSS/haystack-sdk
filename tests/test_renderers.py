@@ -88,6 +88,12 @@ class TestTurtleRenderer:
         out = render_turtle([{**POINT_A, "id": "@7", "equipRef": "@7"}], _exact)
         assert "isPointOf" not in out
 
+    def test_relation_skips_a_target_brick_forbids(self) -> None:
+        # equipRef naming another point: isPointOf falls through to the point's location instead.
+        point = {**POINT_A, "equipRef": "r:42", "siteRef": "@site-1"}
+        out = render_turtle([SITE, POINT_B, point], _exact)
+        assert "bldg:41\n    a brick:Air_Temperature_Sensor ;\n    brick:isPointOf bldg:site-1 ." in out
+
     def test_declared_brick_class_wins_for_equipment(self) -> None:
         out = render_turtle([{**AHU, "brickClass": "brick:Air_Handler_Unit"}], _exact)
         assert "a brick:Air_Handler_Unit ;" in out

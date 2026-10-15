@@ -60,6 +60,10 @@ MODEL = [
         "equipRef": "@equip-6",
     },
     {"id": "@point-13", "point": "m:", "his": "m:", "equipRef": "@equip-6"},
+    # A floor straight under the site, as asset-service emits it when there is no building level: Brick 1.4 only
+    # lets a building contain a floor, so the floor stays unparented and its space still hangs off it.
+    {"id": "@floor-7", "floor": "m:", "siteRef": "@site-1", "dis": "Mezzanine"},
+    {"id": "@space-8", "space": "m:", "floorRef": "@floor-7", "siteRef": "@site-1"},
     # A point with no equip hangs off its most specific location.
     {
         "id": "@point-14",
@@ -119,6 +123,8 @@ def test_model_has_distinct_point_equip_and_location_nodes() -> None:
     assert (BLDG["equip-6"], BRICK.isPartOf, BLDG["equip-5"]) in graph
     assert (BLDG["floor-3"], BRICK.isPartOf, BLDG["building-2"]) in graph
     assert (BLDG["point-14"], BRICK.isPointOf, BLDG["site-1"]) in graph
+    assert not list(graph.triples((BLDG["floor-7"], BRICK.isPartOf, None)))
+    assert (BLDG["space-8"], BRICK.isPartOf, BLDG["floor-7"]) in graph
     assert not any(s == o for s, _, o in graph.triples((None, BRICK.isPointOf, None)))
 
 
