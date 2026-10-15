@@ -96,6 +96,16 @@ class TestTurtleRenderer:
         out = render_turtle([{**AHU, "brickClass": "brick:Not_A_Brick_Class"}], lambda m: (None, 0.0))
         assert "a brick:Equipment ;" in out
 
+    def test_declared_system_class_is_plain_equipment(self) -> None:
+        plant = {
+            "id": "@equip-8",
+            "equip": "m:",
+            "chiller": "m:",
+            "water": "m:",
+            "brickClass": "brick:Chilled_Water_System",
+        }
+        assert "a brick:Equipment ." in render_turtle([plant], lambda m: ("brick:Chiller", 1.0))
+
     def test_unconfident_point_is_generic_with_a_suggestion(self) -> None:
         out = render_turtle([POINT_A], _fuzzy)
         assert "a brick:Sensor ;" in out

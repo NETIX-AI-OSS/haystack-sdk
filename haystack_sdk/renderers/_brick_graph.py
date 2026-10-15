@@ -191,6 +191,9 @@ def _equip_node(
     qname, confidence = resolver_result
     if declared and brick_class_kind(declared) == "equipment":
         node.types = [declared]
+    elif declared:
+        # A Brick System / Collection (a chiller plant) has no equipment class, but is not one of its members either.
+        node.types = ["brick:Equipment"]
     elif qname and confidence >= 1.0 and brick_class_kind(qname) == "equipment":
         node.types = [qname]
     else:
