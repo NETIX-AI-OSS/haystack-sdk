@@ -13,7 +13,7 @@
     "display_name": "Energy Transfer Station",
     "kind": 0,
     "namespace": "netix",
-    "doc": "Customer energy transfer station (ETS) — hydraulic separation between primary distribution and secondary building loop",
+    "doc": "Customer energy transfer station (ETS), hydraulic separation between primary distribution and secondary building loop",
     "is_custom": true,
     "supertype_name": "equip"
   },

@@ -1,4 +1,4 @@
-"""Brick Schema class registry + resolver; covers only universal *point*-level mappings — *equip*-level mappings live in asset-service's ``AssetClass.brick_class``."""
+"""Brick Schema class registry + resolver; covers only universal *point*-level mappings, *equip*-level mappings live in asset-service's ``AssetClass.brick_class``."""
 
 from __future__ import annotations
 

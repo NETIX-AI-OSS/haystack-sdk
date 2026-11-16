@@ -1,4 +1,4 @@
-"""Trio parser — entities separated by ``\\n---\\n``, each line a ``key: value``, bare marker ``key``, or skipped comment/blank line."""
+"""Trio parser, entities separated by ``\\n---\\n``, each line a ``key: value``, bare marker ``key``, or skipped comment/blank line."""
 
 from __future__ import annotations
 

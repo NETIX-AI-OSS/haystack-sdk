@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.1.0 — Unreleased
+## v1.1.0: Unreleased
 
 ### Fixed
 
@@ -40,7 +40,7 @@
 - Cleaned up docs, license headers and docstrings.
 - CI: migrated `ubuntu-latest` jobs to the `build-only` runner.
 
-## v1.0.2 — 2026-06-23
+## v1.0.2: 2026-06-23
 
 > Reconstructed from git history on 2026-09-14; derived from commit subjects and diffs
 > rather than written at release time.
@@ -60,7 +60,7 @@
   `scripts/generate_vocabulary.py`.
 - Expanded renderer, parser and round-trip test coverage, with new golden-grid fixtures.
 
-## v1.0.1 — 2026-06-07
+## v1.0.1: 2026-06-07
 
 > Reconstructed from git history on 2026-09-14; derived from commit subjects and diffs
 > rather than written at release time.
@@ -73,7 +73,7 @@
 
 - Pinned `hatchling==1.30.1` for reproducible source builds.
 
-## v1.0.0 — initial release
+## v1.0.0: initial release
 
 Extracted Haystack 4 wire-format I/O, filter parser, vocabulary, and Brick mapping into a standalone, framework-agnostic Python package.
 
@@ -83,7 +83,7 @@ Extracted Haystack 4 wire-format I/O, filter parser, vocabulary, and Brick mappi
 - Recursive-descent Haystack filter parser with full grammar support (AND/OR/NOT, paths, comparisons, refs).
 - `Ref` parsing and normalization.
 - Vocabulary packs as generated dataclasses:
-  - `CORE` — Haystack 4 core (96 tags)
+  - `CORE`: Haystack 4 core (96 tags)
   - `FDD`, `NETIX_CUSTOM`, `RETAIL_MALL`, `RESIDENTIAL`, `HEALTHCARE`, `WATER_TREATMENT`, `DISTRICT_COOLING`
 - Brick Schema class registry with optional `brickschema`-based validation.
 - `scripts/generate_vocabulary.py` and `scripts/check_vocabulary_generated.py` for build-time validation.

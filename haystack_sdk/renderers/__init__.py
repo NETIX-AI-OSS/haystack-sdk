@@ -1,4 +1,4 @@
-"""Wire-format renderers — Zinc, Trio, Haystack 4 JSON, Turtle, JSON-LD."""
+"""Wire-format renderers, Zinc, Trio, Haystack 4 JSON, Turtle, JSON-LD."""
 
 from __future__ import annotations
 

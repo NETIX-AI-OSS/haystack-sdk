@@ -25,5 +25,5 @@ class Grid(TypedDict):
     rows: list[HaystackEntity]
 
 
-# Marker sentinel — Haystack markers serialize to "m:" in JSON/Trio and to "M" in Zinc.
+# Marker sentinel: Haystack markers serialize to "m:" in JSON/Trio and to "M" in Zinc.
 MARKER: str = "m:"

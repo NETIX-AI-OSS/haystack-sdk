@@ -1,4 +1,4 @@
-"""Golden-grid round-trip tests — parse → render → re-parse must yield equal row dicts, locking the wire-format contract."""
+"""Golden-grid round-trip tests, parse → render → re-parse must yield equal row dicts, locking the wire-format contract."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ def test_zinc_round_trip(fixture_name: str) -> None:
 
 @pytest.mark.parametrize("fixture_name", [p.name for p in FIXTURES.glob("*.trio")])
 def test_trio_round_trip(fixture_name: str) -> None:
-    """Parse a Trio fixture, render back to Trio, and re-parse — rows must match."""
+    """Parse a Trio fixture, render back to Trio, and re-parse, rows must match."""
     original = (FIXTURES / fixture_name).read_text()
     grid = parse_trio(original)
     re_rendered = render_trio(grid)

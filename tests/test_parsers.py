@@ -1,4 +1,4 @@
-"""Parser tests — Zinc, Trio, Haystack 4 JSON."""
+"""Parser tests, Zinc, Trio, Haystack 4 JSON."""
 
 from __future__ import annotations
 
@@ -107,7 +107,7 @@ class TestIterEntities:
 
 
 class TestZincSplitCellsEdgeCases:
-    """Edge cases in _split_cells — embedded commas inside quoted strings."""
+    """Edge cases in _split_cells, embedded commas inside quoted strings."""
 
     def test_embedded_comma_in_quoted_string(self) -> None:
         text = 'ver:"3.0"\nid,dis\n@1,"Hello, world"\n'
