@@ -27,7 +27,7 @@ PACKS: list[tuple[str, str, str, str]] = [
 
 VOCAB_VERSION = "1.0.0"
 
-HEADER = '''"""AUTO-GENERATED from haystack_sdk/vocabulary/data/{json_name}.json — DO NOT EDIT BY HAND.
+HEADER = '''"""AUTO-GENERATED from haystack_sdk/vocabulary/data/{json_name}.json, DO NOT EDIT BY HAND.
 
 Regenerate with::
 
@@ -154,10 +154,10 @@ def _ruff_format(text: str) -> str:
         ).stdout
         return formatted
     except OSError:
-        # ruff not on PATH or subprocess error — return as-is.
+        # ruff not on PATH or subprocess error: return as-is.
         return text
     except subprocess.CalledProcessError:
-        # ruff exited non-zero — return as-is.
+        # ruff exited non-zero: return as-is.
         return text
 
 

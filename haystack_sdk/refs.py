@@ -1,4 +1,4 @@
-"""Haystack Ref parsing and validation — an ``@``-prefixed id with an optional display string, serializing as ``r:<id> [dis]`` in typed JSON."""
+"""Haystack Ref parsing and validation, an ``@``-prefixed id with an optional display string, serializing as ``r:<id> [dis]`` in typed JSON."""
 
 from __future__ import annotations
 

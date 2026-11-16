@@ -1,4 +1,4 @@
-"""AUTO-GENERATED from haystack_sdk/vocabulary/data/netix_custom_tags.json — DO NOT EDIT BY HAND.
+"""AUTO-GENERATED from haystack_sdk/vocabulary/data/netix_custom_tags.json, DO NOT EDIT BY HAND.
 
 Regenerate with::
 

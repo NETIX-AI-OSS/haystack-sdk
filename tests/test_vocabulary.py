@@ -1,4 +1,4 @@
-"""Vocabulary tests — pack contents + helpers."""
+"""Vocabulary tests, pack contents + helpers."""
 
 from __future__ import annotations
 
@@ -55,7 +55,7 @@ def test_validate_markers_with_extra() -> None:
 
 
 def test_vocabulary_is_frozen() -> None:
-    # Vocabulary uses frozen dataclasses — should not allow mutation
+    # Vocabulary uses frozen dataclasses: should not allow mutation
     import pytest
 
     with pytest.raises((AttributeError, TypeError)):

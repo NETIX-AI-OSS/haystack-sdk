@@ -1,4 +1,4 @@
-"""Wire-format parsers — Zinc, Trio, and Haystack 4 JSON — all returning a :class:`haystack_sdk.types.Grid` dict."""
+"""Wire-format parsers, Zinc, Trio, and Haystack 4 JSON, all returning a :class:`haystack_sdk.types.Grid` dict."""
 
 from __future__ import annotations
 

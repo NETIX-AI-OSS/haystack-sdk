@@ -10,7 +10,7 @@ Project Haystack 4 SDK for NETIX services. Pure-Python parsers, renderers, vocab
 - **Brick Schema** class registry and validation.
 - **Ref parsing and normalization** following the Haystack 4 spec.
 
-The SDK is **framework-agnostic** — no Django, no DRF, no I/O dependencies. Services wrap these primitives in DRF parsers/renderers as needed.
+The SDK is **framework-agnostic**, no Django, no DRF, no I/O dependencies. Services wrap these primitives in DRF parsers/renderers as needed.
 
 ## Installation
 
@@ -75,7 +75,7 @@ Core Haystack 4 vocabulary plus NETIX domain extension packs:
 | Pack | Domain |
 |---|---|
 | `CORE` | Haystack 4 core tags (96 markers/kinds). |
-| `FDD` | Fault detection & diagnostics — `equipType`, `faultType`, ...  |
+| `FDD` | Fault detection & diagnostics, `equipType`, `faultType`, ...  |
 | `NETIX_CUSTOM` | NETIX-specific custom tags. |
 | `RETAIL_MALL` | Retail / mall building markers. |
 | `RESIDENTIAL` | Smart residential markers. |

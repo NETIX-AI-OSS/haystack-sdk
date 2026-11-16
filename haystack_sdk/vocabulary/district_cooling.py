@@ -1,4 +1,4 @@
-"""AUTO-GENERATED from haystack_sdk/vocabulary/data/district_cooling_tags.json — DO NOT EDIT BY HAND.
+"""AUTO-GENERATED from haystack_sdk/vocabulary/data/district_cooling_tags.json, DO NOT EDIT BY HAND.
 
 Regenerate with::
 
@@ -21,7 +21,7 @@ ENERGY_TRANSFER_STATION = TagDef(
     display_name="Energy Transfer Station",
     kind=0,
     namespace="netix",
-    doc="Customer energy transfer station (ETS) — hydraulic separation between primary distribution and secondary building loop",
+    doc="Customer energy transfer station (ETS), hydraulic separation between primary distribution and secondary building loop",
 )
 CHW_FLOW_METER = TagDef(
     name="chwFlowMeter",

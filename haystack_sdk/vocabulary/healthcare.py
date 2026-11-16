@@ -1,4 +1,4 @@
-"""AUTO-GENERATED from haystack_sdk/vocabulary/data/healthcare_tags.json — DO NOT EDIT BY HAND.
+"""AUTO-GENERATED from haystack_sdk/vocabulary/data/healthcare_tags.json, DO NOT EDIT BY HAND.
 
 Regenerate with::
 
@@ -17,7 +17,7 @@ ICU_ROOM = TagDef(
     display_name="ICU Room",
     kind=0,
     namespace="netix",
-    doc="Space is an Intensive Care Unit room — critical HVAC and monitoring requirements",
+    doc="Space is an Intensive Care Unit room, critical HVAC and monitoring requirements",
 )
 ISOLATION_ROOM = TagDef(
     name="isolationRoom",
@@ -45,21 +45,21 @@ STERILE_ZONE = TagDef(
     display_name="Sterile Zone",
     kind=0,
     namespace="netix",
-    doc="Sterile processing zone or clean room — HVAC pressure, filtration, and humidity are critical",
+    doc="Sterile processing zone or clean room, HVAC pressure, filtration, and humidity are critical",
 )
 PHARMACY_COLD_ROOM = TagDef(
     name="pharmacyColdRoom",
     display_name="Pharmacy Cold Room",
     kind=0,
     namespace="netix",
-    doc="Pharmacy refrigerated storage space — temperature and humidity alarming required",
+    doc="Pharmacy refrigerated storage space, temperature and humidity alarming required",
 )
 LAB_ROOM = TagDef(
     name="labRoom",
     display_name="Lab Room",
     kind=0,
     namespace="netix",
-    doc="Medical or research laboratory space — fume extraction and pressure differential requirements",
+    doc="Medical or research laboratory space, fume extraction and pressure differential requirements",
 )
 
 PACK = Vocabulary(

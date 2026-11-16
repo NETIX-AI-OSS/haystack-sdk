@@ -19,7 +19,7 @@ class FilterNode:
 
 @dataclass
 class MarkerNode(FilterNode):
-    """A bare marker name — present if the key exists in the entity."""
+    """A bare marker name, present if the key exists in the entity."""
 
     name: str
 

@@ -1,4 +1,4 @@
-"""Renderer tests — Zinc, Trio, JSON, Turtle, JSON-LD."""
+"""Renderer tests, Zinc, Trio, JSON, Turtle, JSON-LD."""
 
 from __future__ import annotations
 
